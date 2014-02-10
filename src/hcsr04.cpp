@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include "hcsr04.h"
 
-int read_distance(int echoPin, int triggerPin) {
+long read_distance(int echoPin, int triggerPin) {
 
-	long duration;
+	long duration, distance;
 
 	digitalWrite(triggerPin, LOW);
 	delayMicroseconds(2);
@@ -11,6 +11,14 @@ int read_distance(int echoPin, int triggerPin) {
 	delayMicroseconds(10);
 	digitalWrite(triggerPin, LOW);
 	duration = pulseIn(echoPin, HIGH);
+
+	// Duration in microseconds
+	distance = duration / 58.2;
+
+	if (distance <= 0 || distance >= MAX_DISTANCE) {
+		return E_INVALID_DISTANCE;
+	} else {
+		return distance;
+	}
 	
-	return duration/58.2;
 }
