@@ -1,5 +1,5 @@
-#ifndef HCSR04_GUARD
-#define HCSR04_GUARD
+#ifndef HCSR04_H
+#define HCSR04_H
 // Constants definition
 #define MAX_DISTANCE 200
 
